@@ -3,10 +3,10 @@ from website.forms import SearchForm
 from website.models import Product
 
 # Define a Blueprint for home routes
+# Define a Blueprint for home routes
 home_bp = Blueprint('home', __name__)
 
 @home_bp.route('/', methods=['GET', 'POST'])
-@home_bp.route('/home', methods=['GET', 'POST'])
 def home():
     form = SearchForm()
     if form.validate_on_submit():
@@ -17,7 +17,7 @@ def home():
     return render_template('home.html', form=form)
 
 # Define a Blueprint for product route
-product_bp = Blueprint('product', __name__)
+product_bp = Blueprint('product', __name__, url_prefix='/product')
 
 @product_bp.route('/product/<int:id>')
 def product(id):
@@ -25,7 +25,8 @@ def product(id):
     return render_template('product.html', product=product)
 
 # Define a Blueprint for basket route
-basket_bp = Blueprint('basket', __name__)
+basket_bp = Blueprint('basket', __name__, url_prefix='/basket')
+
 
 @basket_bp.route('/basket')
 def basket():
@@ -33,7 +34,7 @@ def basket():
     return render_template('basket.html')
 
 # Define a Blueprint for checkout route
-checkout_bp = Blueprint('checkout', __name__)
+checkout_bp = Blueprint('checkout', __name__, url_prefix='/checkout')
 
 @checkout_bp.route('/checkout', methods=['GET', 'POST'])
 def checkout():
