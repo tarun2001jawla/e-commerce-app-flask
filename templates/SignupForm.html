@@ -1,0 +1,17 @@
+<!-- SignupForm.html -->
+<form action="{{ url_for('auth.signup') }}" method="POST">
+    {{ signup_form.hidden_tag() }}
+    <div class="form-group">
+        {{ signup_form.username.label }} {{ signup_form.username(class="form-control", placeholder="Username") }}
+    </div>
+    <div class="form-group">
+        {{ signup_form.email.label }} {{ signup_form.email(class="form-control", placeholder="Email") }}
+    </div>
+    <div class="form-group">
+        {{ signup_form.password.label }} {{ signup_form.password(class="form-control", placeholder="Password") }}
+    </div>
+    <div class="form-group">
+        {{ signup_form.confirm_password.label }} {{ signup_form.confirm_password(class="form-control", placeholder="Confirm Password") }}
+    </div>
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+</form>

@@ -1,4 +1,3 @@
-<!-- home.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,38 +9,52 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <style>
-        /* Custom CSS for Product Cards */
+        /* Hero Section */
+        .hero-section {
+            background-image: url('{{ url_for('static', filename='images/HeroImage.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+
+
         .product-card {
-            border: 1px solid #dee2e6; /* Border color */
-            border-radius: 10px; /* Border radius */
-            transition: all 0.3s ease; /* Transition effect */
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            transition: all 0.3s ease;
         }
 
         .product-card:hover {
-            transform: translateY(-5px); /* Move card up on hover */
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+            transform: translateY(-5px);
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
         }
 
         .product-card img {
-            width: 100%; /* Image width */
-            height: auto; /* Maintain aspect ratio */
-            border-top-left-radius: 10px; /* Rounded corners */
-            border-top-right-radius: 10px; /* Rounded corners */
+            width: 100%;
+            height: auto;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
         }
 
         .product-card .card-body {
-            padding: 20px; /* Padding inside card body */
+            padding: 20px;
         }
 
         .product-card .btn {
-            width: 100%; /* Full width button */
-            transition: all 0.3s ease; /* Transition effect */
+            width: 100%;
+            transition: all 0.3s ease;
         }
 
         .product-card .btn:hover {
-            background-color: #17a2b8; /* Change background color on hover */
+            background-color: #17a2b8;
         }
     </style>
 </head>
@@ -50,9 +63,10 @@
 <!-- Include Navbar -->
 {% include 'navbar.html' %}
 
+<!-- Hero Section -->
+<div class="hero-section"></div>
 
-
-<div class="container">
+<div class="container" id="products">
     <h1 class="mt-5 mb-4 text-center">Featured Products</h1>
     <div class="row">
         {% for product in products %}
@@ -76,13 +90,12 @@
     </div>
 </div>
 
-
-
+<!-- Include Footer -->
+{% include 'footer.html' %}
 
 <!-- Bootstrap JS and jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-{% include 'footer.html' %}
 </body>
 </html>
