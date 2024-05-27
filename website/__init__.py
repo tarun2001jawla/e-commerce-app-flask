@@ -2,11 +2,16 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
+bootstrap = Bootstrap()
+db = SQLAlchemy()
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../instance/app.sqlite'
+def create_app():
+    app = Flask(__name__, template_folder='templates')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../instance/app.sqlite'
 
-bootstrap = Bootstrap(app)
-db = SQLAlchemy(app)
+    bootstrap.init_app(app)
+    db.init_app(app)
 
-from website import models, routes
+    from website import models, routes
+
+    return app

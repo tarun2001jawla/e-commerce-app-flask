@@ -1,0 +1,88 @@
+<!-- home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Custom CSS for Product Cards */
+        .product-card {
+            border: 1px solid #dee2e6; /* Border color */
+            border-radius: 10px; /* Border radius */
+            transition: all 0.3s ease; /* Transition effect */
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px); /* Move card up on hover */
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+        }
+
+        .product-card img {
+            width: 100%; /* Image width */
+            height: auto; /* Maintain aspect ratio */
+            border-top-left-radius: 10px; /* Rounded corners */
+            border-top-right-radius: 10px; /* Rounded corners */
+        }
+
+        .product-card .card-body {
+            padding: 20px; /* Padding inside card body */
+        }
+
+        .product-card .btn {
+            width: 100%; /* Full width button */
+            transition: all 0.3s ease; /* Transition effect */
+        }
+
+        .product-card .btn:hover {
+            background-color: #17a2b8; /* Change background color on hover */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Include Navbar -->
+{% include 'navbar.html' %}
+
+
+
+<div class="container">
+    <h1 class="mt-5 mb-4 text-center">Featured Products</h1>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3 mb-4">
+            <div class="card product-card">
+                <!-- Product Image Placeholder -->
+                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Product Image">
+                <div class="card-body">
+                    <!-- Product Title -->
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <!-- Product Price -->
+                    <p class="card-text">${{ product.price }}</p>
+                    <!-- Product Description -->
+                    <p class="card-text">{{ product.description }}</p>
+                    <!-- Add to Cart Button -->
+                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% include 'footer.html' %}
+</body>
+</html>
