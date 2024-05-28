@@ -86,27 +86,27 @@
                     <form action="{{ url_for('checkout.complete_order') }}" method="post">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone</label>
-                            <input type="text" class="form-control" id="phone" placeholder="Enter your phone number">
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter your phone number">
                         </div>
                         <div class="form-group">
                             <label for="state">State</label>
-                            <input type="text" class="form-control" id="state" placeholder="Enter your state">
+                            <input type="text" class="form-control" id="state" name="state" placeholder="Enter your state">
                         </div>
                         <div class="form-group">
                             <label for="city">City</label>
-                            <input type="text" class="form-control" id="city" placeholder="Enter your city">
+                            <input type="text" class="form-control" id="city" name="city" placeholder="Enter your city">
                         </div>
                         <div class="form-group">
                             <label for="zip">ZIP Code</label>
-                            <input type="text" class="form-control" id="zip" placeholder="Enter your ZIP code">
+                            <input type="text" class="form-control" id="zip" name="zip" placeholder="Enter your ZIP code">
                         </div>
                         <button type="submit" class="btn btn-primary">Complete Order</button>
                     </form>

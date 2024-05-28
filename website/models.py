@@ -20,9 +20,23 @@ class Product(db.Model):
 
 
 
+from website import db
+
 class Order(db.Model):
+    __tablename__ = 'order'
     id = db.Column(db.Integer, primary_key=True)
-    customer_name = db.Column(db.String(100), nullable=False)
+    order_id = db.Column(db.Text, unique=True, nullable=False)
+    customer_name = db.Column(db.Text, nullable=False)
+    customer_email = db.Column(db.Text, nullable=False)
+    customer_phone = db.Column(db.Text)
+    customer_state = db.Column(db.Text)
+    customer_city = db.Column(db.Text)
+    customer_zip = db.Column(db.Text)
+    order_date = db.Column(db.DateTime, nullable=False)
+    expected_delivery_date = db.Column(db.DateTime, nullable=False)
+
+    def __repr__(self):
+        return f'Order(order_id={self.order_id}, customer_name={self.customer_name})'
 
 class OrderDetail(db.Model):
     id = db.Column(db.Integer, primary_key=True)

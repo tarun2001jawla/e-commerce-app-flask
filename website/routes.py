@@ -4,14 +4,10 @@ from website import db, bcrypt
 from website.models import User, Product
 from flask import session
 from datetime import datetime, timedelta
-import random
 import string
-import os
-from flask_login import login_user, logout_user, current_user, login_required
-
-
 import random
-import string
+from website import db
+from website.models import User, Product, Order
 
 def generate_random_order_id():
     # Generate a random string of length 8 with alphanumeric characters
@@ -77,17 +73,41 @@ def complete_order():
     city = request.form.get('city')
     zip_code = request.form.get('zip')
 
+    # Debugging: print form data to console
+    print("Form data:", name, email, phone, state, city, zip_code)
+
+    if not all([name, email, phone, state, city, zip_code]):
+        # Handle missing form data
+        flash('Please fill out all fields.')
+        return redirect(url_for('cart'))
+
     # Generate a random order ID
     order_id = generate_random_order_id()
 
     # Calculate the expected delivery date (5 days from now)
     expected_delivery_date = datetime.now() + timedelta(days=5)
 
+    # Store order and customer details in the database
+    order = Order(
+        order_id=order_id,
+        customer_name=name,
+        customer_email=email,
+        customer_phone=phone,
+        customer_state=state,
+        customer_city=city,
+        customer_zip=zip_code,
+        order_date=datetime.now(),
+        expected_delivery_date=expected_delivery_date
+    )
+    db.session.add(order)
+    db.session.commit()
+
     # Clear the cart from the session
     session.pop('cart', None)
 
     # Render the order confirmation page
     return render_template('order_confirmation.html', order_id=order_id, expected_delivery_date=expected_delivery_date)
+
 
 # Define a Blueprint for authentication routes
 auth_bp = Blueprint('auth', __name__)
