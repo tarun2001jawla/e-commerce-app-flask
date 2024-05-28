@@ -3,6 +3,7 @@ from website.routes import home_bp, product_bp, basket_bp, checkout_bp,auth_bp
 
 app = create_app()
 
+
 app.config['SECRET_KEY'] = '123'
 
 # Register Blueprints with the Flask app

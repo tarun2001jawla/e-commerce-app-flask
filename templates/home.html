@@ -24,8 +24,6 @@
             position: relative;
         }
 
-
-
         .product-card {
             border: 1px solid #dee2e6;
             border-radius: 10px;
@@ -59,43 +57,44 @@
     </style>
 </head>
 <body>
+    <!-- Include Navbar -->
+    {% include 'navbar.html' %}
 
-<!-- Include Navbar -->
-{% include 'navbar.html' %}
+    <!-- Hero Section -->
+    <div class="hero-section"></div>
 
-<!-- Hero Section -->
-<div class="hero-section"></div>
-
-<div class="container" id="products">
-    <h1 class="mt-5 mb-4 text-center">Featured Products</h1>
-    <div class="row">
-        {% for product in products %}
-        <div class="col-md-3 mb-4">
-            <div class="card product-card">
-                <!-- Product Image Placeholder -->
-                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                    <!-- Product Title -->
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <!-- Product Price -->
-                    <p class="card-text">${{ product.price }}</p>
-                    <!-- Product Description -->
-                    <p class="card-text">{{ product.description }}</p>
-                    <!-- Add to Cart Button -->
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
+    <div class="container" id="products">
+        <h1 class="mt-5 mb-4 text-center">Featured Products</h1>
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-3 mb-4">
+                <div class="card product-card">
+                    <!-- Product Image Placeholder -->
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Product Image">
+                    <div class="card-body">
+                        <!-- Product Title -->
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <!-- Product Price -->
+                        <p class="card-text">${{ product.price }}</p>
+                        <!-- Product Description -->
+                        <p class="card-text">{{ product.description }}</p>
+                        <!-- Add to Cart Button -->
+                        <form action="{{ url_for('basket.add_to_cart', product_id=product.id) }}" method="post" style="display: inline;">
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        </form>
+                    </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
-</div>
 
-<!-- Include Footer -->
-{% include 'footer.html' %}
+    <!-- Include Footer -->
+    {% include 'footer.html' %}
 
-<!-- Bootstrap JS and jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

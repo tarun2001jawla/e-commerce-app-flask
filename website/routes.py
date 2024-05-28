@@ -2,7 +2,22 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 from website.forms import SearchForm, SignupForm, LoginForm
 from website import db, bcrypt
 from website.models import User, Product
+from flask import session
+from datetime import datetime, timedelta
+import random
+import string
 import os
+from flask_login import login_user, logout_user, current_user, login_required
+
+
+import random
+import string
+
+def generate_random_order_id():
+    # Generate a random string of length 8 with alphanumeric characters
+    characters = string.ascii_letters + string.digits
+    order_id = ''.join(random.choice(characters) for _ in range(8))
+    return order_id
 
 # Define a Blueprint for home routes
 home_bp = Blueprint('home', __name__)
@@ -30,9 +45,20 @@ def product(id):
 # Define a Blueprint for basket route
 basket_bp = Blueprint('basket', __name__, url_prefix='/basket')
 
-@basket_bp.route('/')
-def basket():
-    return render_template('basket.html')
+@basket_bp.route('/cart')
+def cart():
+    cart_items = session.get('cart', [])
+    return render_template('cart.html', title='Your Cart', cart_items=cart_items)
+
+# add to cart routes
+@basket_bp.route('/add_to_cart/<int:product_id>', methods=['POST'])
+def add_to_cart(product_id):
+    product = Product.query.get_or_404(product_id)
+    if product:
+        cart_items = session.get('cart', [])
+        cart_items.append(product.to_dict())
+        session['cart'] = cart_items
+    return redirect(url_for('basket.cart'))
 
 # Define a Blueprint for checkout route
 checkout_bp = Blueprint('checkout', __name__, url_prefix='/checkout')
@@ -40,6 +66,28 @@ checkout_bp = Blueprint('checkout', __name__, url_prefix='/checkout')
 @checkout_bp.route('/', methods=['GET', 'POST'])
 def checkout():
     return render_template('checkout.html')
+
+@checkout_bp.route('/complete_order', methods=['POST'])
+def complete_order():
+    # Retrieve form data
+    name = request.form.get('name')
+    email = request.form.get('email')
+    phone = request.form.get('phone')
+    state = request.form.get('state')
+    city = request.form.get('city')
+    zip_code = request.form.get('zip')
+
+    # Generate a random order ID
+    order_id = generate_random_order_id()
+
+    # Calculate the expected delivery date (5 days from now)
+    expected_delivery_date = datetime.now() + timedelta(days=5)
+
+    # Clear the cart from the session
+    session.pop('cart', None)
+
+    # Render the order confirmation page
+    return render_template('order_confirmation.html', order_id=order_id, expected_delivery_date=expected_delivery_date)
 
 # Define a Blueprint for authentication routes
 auth_bp = Blueprint('auth', __name__)
@@ -71,3 +119,5 @@ def login():
         else:
             flash('Login Unsuccessful. Please check email and password.', 'danger')
     return render_template('LoginForm.html', title='Login', login_form=login_form)
+
+
