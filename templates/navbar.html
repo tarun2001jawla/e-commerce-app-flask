@@ -46,16 +46,18 @@
                     <a class="nav-link" href="#"><i class="fas fa-user"></i> Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-store"></i> Shop</a>
+                    <a class="nav-link" href="{{ url_for('shop.shop') }}" ><i class="fas fa-store"></i> Shop</a>
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('basket.cart') }}"><i class="fas fa-shopping-cart"></i> Cart</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2 search-bar" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
-            </form>
+           <form class="form-inline my-2 my-lg-0" id="searchForm">
+    <input class="form-control mr-sm-2 search-bar" type="search" id="searchInput" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-light my-2 my-sm-0" type="button" onclick="searchProducts()"><i class="fas fa-search"></i></button>
+</form>
+
             <ul class="navbar-nav">
                 {% if login_form is defined %}
                 <li class="nav-item">
@@ -112,5 +114,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

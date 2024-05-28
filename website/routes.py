@@ -107,7 +107,13 @@ def complete_order():
 
     # Render the order confirmation page
     return render_template('order_confirmation.html', order_id=order_id, expected_delivery_date=expected_delivery_date)
+#Define a blueprrint for shop
+shop_bp = Blueprint('shop', __name__, url_prefix='/shop')
 
+@shop_bp.route('/')
+def shop():
+    products = Product.query.all()
+    return render_template('shop.html', products=products)
 
 # Define a Blueprint for authentication routes
 auth_bp = Blueprint('auth', __name__)

@@ -1,0 +1,112 @@
+<!-- shop.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+        /* Product Card Styles */
+        .product-card {
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .product-card .card-body {
+            padding: 20px;
+        }
+
+        .product-card .btn {
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .product-card .btn:hover {
+            background-color: #17a2b8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Navbar -->
+    {% include 'navbar.html' %}
+
+    <div class="container" id="products">
+        <h1 class="mt-5 mb-4 text-center">Shop Our Products</h1>
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-3 mb-4">
+                <div class="card product-card">
+                    <!-- Product Image -->
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Product Image">
+
+                    <div class="card-body">
+                        <!-- Product Title -->
+                       <h5 class="card-title product-title">{{ product.name }}</h5>
+
+                        <!-- Product Price -->
+                        <p class="card-text">${{ product.price }}</p>
+                        <!-- Product Description -->
+                        <p class="card-text">{{ product.description }}</p>
+                        <!-- Add to Cart Button -->
+                        <form action="{{ url_for('basket.add_to_cart', product_id=product.id) }}" method="post" style="display: inline;">
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Include Footer -->
+    {% include 'footer.html' %}
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ <script>
+        function searchProducts() {
+            // Get the search query from the input field
+            var searchQuery = document.getElementById("searchInput").value.toLowerCase();
+
+            // Get all product titles
+            var productTitles = document.getElementsByClassName("product-title");
+
+            // Loop through all product titles and check if they match the search query
+            for (var i = 0; i < productTitles.length; i++) {
+                var title = productTitles[i].innerText.toLowerCase();
+                var card = productTitles[i].closest(".product-card");
+
+                // If the title contains the search query, display the product card
+                if (title.includes(searchQuery)) {
+                    card.style.display = "block";
+                } else {
+                    // If the title does not contain the search query, hide the product card
+                    card.style.display = "none";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>

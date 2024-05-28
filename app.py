@@ -1,5 +1,5 @@
 from website import create_app
-from website.routes import home_bp, product_bp, basket_bp, checkout_bp,auth_bp
+from website.routes import home_bp, product_bp, basket_bp, checkout_bp,auth_bp, shop_bp
 
 app = create_app()
 
@@ -12,6 +12,7 @@ app.register_blueprint(product_bp)
 app.register_blueprint(basket_bp)
 app.register_blueprint(checkout_bp)
 app.register_blueprint(auth_bp)
+app.register_blueprint(shop_bp)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080, use_reloader=False)
