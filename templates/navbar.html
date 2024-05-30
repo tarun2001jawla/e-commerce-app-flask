@@ -114,6 +114,29 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    function searchProducts() {
+        // Get the search query from the input field
+        var searchQuery = document.getElementById("searchInput").value.toLowerCase();
+
+        // Get all product titles
+        var productTitles = document.getElementsByClassName("product-title");
+
+        // Loop through all product titles and check if they match the search query
+        for (var i = 0; i < productTitles.length; i++) {
+            var title = productTitles[i].innerText.toLowerCase();
+            var card = productTitles[i].closest(".product-card");
+
+            // If the title contains the search query, display the product card
+            if (title.includes(searchQuery)) {
+                card.style.display = "block";
+            } else {
+                // If the title does not contain the search query, hide the product card
+                card.style.display = "none";
+            }
+        }
+    }
+</script>
 
 </body>
 </html>

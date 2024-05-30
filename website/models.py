@@ -7,16 +7,23 @@ class Product(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
+    author = db.Column(db.String(100), nullable=True)  # Add author column
     price = db.Column(db.Float, nullable=False)
+    isbn = db.Column(db.String(20), nullable=True)
     description = db.Column(db.Text, nullable=False)
+    image = db.Column(db.String(255), nullable=False)
 
     def to_dict(self):
         return {
             'id': self.id,
             'name': self.name,
+            'author': self.author,
             'price': self.price,
+            'isbn': self.isbn,
             'description': self.description
         }
+
+
 
 
 

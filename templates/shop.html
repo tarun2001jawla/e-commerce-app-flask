@@ -56,7 +56,7 @@
             <div class="col-md-3 mb-4">
                 <div class="card product-card">
                     <!-- Product Image -->
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Product Image">
+                    <img src="{{ product.image }}" class="card-img-top" alt="Book Image">
 
                     <div class="card-body">
                         <!-- Product Title -->
@@ -85,6 +85,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
  <script>
+        //js function that checks if the product matches the searched product name
         function searchProducts() {
             // Get the search query from the input field
             var searchQuery = document.getElementById("searchInput").value.toLowerCase();
@@ -102,6 +103,7 @@
                     card.style.display = "block";
                 } else {
                     // If the title does not contain the search query, hide the product card
+
                     card.style.display = "none";
                 }
             }

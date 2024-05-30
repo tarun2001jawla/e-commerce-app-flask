@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Book Store</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome -->
@@ -12,17 +12,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <style>
         /* Hero Section */
-        .hero-section {
-            background-image: url('{{ url_for('static', filename='images/HeroImage.jpg') }}');
-            background-size: cover;
-            background-position: center;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            color: white;
-            text-align: center;
-            position: relative;
-        }
+        /* Hero Section */
+.hero-section {
+
+    background-image: url('{{ url_for('static', filename='images/HeroImage.jpg') }}');
+    background-size: cover;
+    background-position: center;
+    height: 800px;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-align: center;
+    position: relative;
+}
 
         .product-card {
             border: 1px solid #dee2e6;
@@ -70,7 +72,7 @@
             <div class="col-md-3 mb-4">
                 <div class="card product-card">
                     <!-- Product Image Placeholder -->
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Product Image">
+                  <img src="{{ product.image }}" class="card-img-top" alt="Book Image">
                     <div class="card-body">
                         <!-- Product Title -->
                         <h5 class="card-title">{{ product.name }}</h5>
